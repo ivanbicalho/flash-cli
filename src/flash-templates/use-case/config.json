@@ -1,0 +1,30 @@
+{
+    "creations": [
+        {
+            "folder" : "",
+            "file": "UseCaseName.cs"
+        },
+        {
+            "folder" : "Features/UseCaseName",
+            "file": "UseCaseName.cs"
+        },
+        {
+            "folder" : "Features/UseCaseName",
+            "file": "UseCaseNameInput.cs"
+        },
+        {
+            "folder" : "Features/UseCaseName",
+            "file": "UseCaseNameOutput.cs"
+        }
+    ],
+    "variables": [
+        {
+            "replace": "UseCaseName",
+            "question": "Digite o nome do caso de uso:"
+        },
+        {
+            "replace": "Repository",
+            "question": "Digite o nome do repositório:"
+        }
+    ]
+}
