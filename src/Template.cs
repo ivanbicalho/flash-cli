@@ -1,94 +1,96 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net.Cache;
 using System.Threading.Tasks;
 
-public class Template
+namespace flash
 {
-    public Template(string name)
+    public class Template
     {
-        Name = name;
-    }
-
-    public string Name { get; }
-    public string ErrorMessage { get; private set; }
-    public bool IsValid => ErrorMessage == null;
-    public IEnumerable<Creation> Creations { get; set; }
-    public IEnumerable<Variable> Variables { get; set; }
-
-    public async Task<bool> Validate()
-    {
-        Creations ??= new List<Creation>();
-        Variables ??= new List<Variable>();
-
-        var result = await ValidateCreations();
-        
-        if (result == null)
-            result = await ValidateVariables();
-
-        if (result != null)
+        public Template(string name)
         {
-            ErrorMessage = result;
-            return false;
+            Name = name;
         }
+
+        public string Name { get; }
+        public string ErrorMessage { get; private set; }
+        public bool IsValid => ErrorMessage == null;
+        public IEnumerable<Creation> Creations { get; set; }
+        public IEnumerable<Variable> Variables { get; set; }
+
+        public async Task<bool> Validate()
+        {
+            Creations ??= new List<Creation>();
+            Variables ??= new List<Variable>();
+
+            var result = await ValidateCreations();
         
-        return true;
-    }
+            if (result == null)
+                result = await ValidateVariables();
+
+            if (result != null)
+            {
+                ErrorMessage = result;
+                return false;
+            }
+        
+            return true;
+        }
     
-    private async Task<string> ValidateCreations()
-    {
-        if (!Creations.Any())
-            return $"Item 'creations' cannot be null or empty";
-
-        foreach (var creation in Creations)
+        private async Task<string> ValidateCreations()
         {
-            var result = creation.Validate();
-            if (result != null)
-                return await Task.FromResult(result);
-        }
+            if (!Creations.Any())
+                return $"Array 'creations' cannot be null or empty";
+
+            foreach (var creation in Creations)
+            {
+                var result = creation.Validate();
+                if (result != null)
+                    return await Task.FromResult(result);
+            }
         
-        return null;
-    }
-
-    private async Task<string> ValidateVariables()
-    {
-        foreach (var variable in Variables)
-        {
-            var result = variable.Validate();
-            if (result != null)
-                return await Task.FromResult(result);
+            return null;
         }
 
-        return null;
-    }
-
-    public async Task Create()
-    {
-        foreach (var creation in Creations)
+        private async Task<string> ValidateVariables()
         {
-            if (creation.HasFile)
+            foreach (var variable in Variables)
             {
-                var path = ReplaceVariables(creation.FilePath);
-                var content = ReplaceVariables(await creation.GetFileContent());
-                await File.WriteAllTextAsync(path, content);
+                var result = variable.Validate();
+                if (result != null)
+                    return await Task.FromResult(result);
             }
-            else
-            {
-                var path = ReplaceVariables(creation.Folder);
-                if (!Directory.Exists(path))
-                    Directory.CreateDirectory(path);
-            }
-        }
-    }
 
-    private string ReplaceVariables(string content)
-    {
-        foreach (var variable in Variables)
+            return null;
+        }
+
+        public async Task Create()
         {
-            content = content.Replace(variable.Replace, variable.Value);
+            foreach (var creation in Creations)
+            {
+                if (creation.HasFile)
+                {
+                    var path = ReplaceVariables(creation.FilePath);
+                    var content = ReplaceVariables(await creation.GetFileContent());
+                    await File.WriteAllTextAsync(path, content);
+                }
+                else
+                {
+                    var path = ReplaceVariables(creation.Folder);
+                    if (!Directory.Exists(path))
+                        Directory.CreateDirectory(path);
+                }
+            }
         }
 
-        return content;
+        private string ReplaceVariables(string content)
+        {
+            foreach (var variable in Variables)
+            {
+                content = content.Replace(variable.Replace, variable.Value);
+            }
+
+            return content;
+        }
     }
 }

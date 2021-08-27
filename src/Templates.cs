@@ -1,53 +1,61 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-public class Templates
+namespace flash
 {
-    internal static readonly string FlashTemplatesFolder = "";
-    
-    private readonly List<Template> _items = new List<Template>();
-    public IEnumerable<Template> Items => _items;
-    public string ErrorMessage { get; private set; }
-    public bool IsValid => ErrorMessage == null;
-
-    public async Task Load()
+    public class Templates
     {
-        if (!Directory.Exists(FlashTemplatesFolder))
+        internal static readonly string FlashTemplatesFolder =
+            Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+
+        private readonly List<Template> _items = new();
+        public IEnumerable<Template> Items => _items;
+        public string ErrorMessage { get; private set; }
+        public bool IsValid => ErrorMessage == null;
+
+        public async Task Load()
         {
-            ErrorMessage = "Folder 'flash-templates' does not exist. Create one besides the executable";
-            return;
-        }
-        
-        var folders = Directory.GetDirectories(FlashTemplatesFolder);
-        foreach (var folder in folders)
-        {
-            try
+            if (!Directory.Exists(FlashTemplatesFolder))
             {
-                var json = await File.ReadAllTextAsync(Path.Combine(folder, "config.json"));
-                var template = JsonSerializer.Deserialize<Template>(json);
-                
+                ErrorMessage = "Folder 'flash-templates' does not exist. Create one next to the executable";
+                return;
+            }
+
+            var folders = Directory.GetDirectories(FlashTemplatesFolder);
+            foreach (var folder in folders)
+            {
+                string json;
+                Template template;
+
+                try
+                {
+                    json = await File.ReadAllTextAsync(Path.Combine(folder, "config.json"));
+                    template = JsonSerializer.Deserialize<Template>(json);
+                }
+                catch
+                {
+                    ErrorMessage = $"File 'config.json' doesn't exist or it's mal-formed in template folder '{folder}'";
+                    return;
+                }
+
                 if (!await template.Validate())
                 {
                     _items.Clear();
                     ErrorMessage = $"Invalid template '{template.Name}': {template.ErrorMessage}";
                     return;
                 }
-                
+
                 _items.Add(template);
             }
-            catch
-            {
-                ErrorMessage = $"File 'config.json' doesn't exist or it's mal-formed in template folder '{folder}'";
-            }
         }
-    }
 
-    public Template Get(string templateName)
-    {
-        return Items.FirstOrDefault(item => item.Name == templateName);
+        public Template Get(string templateName)
+        {
+            return Items.FirstOrDefault(item => item.Name == templateName);
+        }
     }
 }

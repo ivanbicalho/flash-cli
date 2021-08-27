@@ -1,20 +1,23 @@
-public class Variable
+namespace flash
 {
-    public string Replace { get; set; }
-    public string Question { get; set; }
-    public string Value { get; set; }
-
-    public string Validate()
+    public class Variable
     {
-        if (string.IsNullOrWhiteSpace(Replace))
-            return "Invalid 'variables', replace cannot be null or empty";
-        
-        if (string.IsNullOrWhiteSpace(Question))
-            return "Invalid 'variables', question cannot be null or empty";
-        
-        if (string.IsNullOrWhiteSpace(Value))
-            return "Invalid 'variables', value cannot be null or empty";
+        public string Replace { get; set; }
+        public string Question { get; set; }
+        public string Value { get; set; }
 
-        return null;
+        public string Validate()
+        {
+            if (string.IsNullOrWhiteSpace(Replace))
+                return "Invalid 'variables', field replace cannot be null or empty";
+        
+            if (string.IsNullOrWhiteSpace(Question))
+                return "Invalid 'variables', field question cannot be null or empty";
+        
+            if (string.IsNullOrWhiteSpace(Value))
+                return "Invalid 'variables', field value cannot be null or empty";
+
+            return null;
+        }
     }
 }

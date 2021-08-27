@@ -38,15 +38,19 @@ namespace flash.Commands
             Console.WriteLine("Template created successfully!");
         }
 
-        private void ReadVariables(Template template)
+        private static void ReadVariables(Template template)
         {
             foreach (var variable in template.Variables)
             {
                 do
                 {
-                    Console.Write(variable.Question);
-                    variable.Value = Console.ReadLine(); 
-                } while (!string.IsNullOrWhiteSpace(variable.Value));
+                    Console.Write($"{variable.Question} ");
+                    variable.Value = Console.ReadLine();
+                    
+                    if (string.IsNullOrWhiteSpace(variable.Value))
+                        Console.WriteLine("Value cannot be empty, please enter again");
+                    
+                } while (string.IsNullOrWhiteSpace(variable.Value));
             }
         }
     }
