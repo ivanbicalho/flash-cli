@@ -32,7 +32,7 @@ namespace flash
             return null;
         }
 
-        public string FilePath => HasFile ? Path.Combine(Templates.FlashTemplatesFolder, File) : string.Empty;
+        public string FilePath => HasFile ? Path.Combine(FlashTemplates.FlashTemplatesFolder, File) : string.Empty;
         public bool HasFile => !string.IsNullOrWhiteSpace(File);
         public bool HasFolder => !string.IsNullOrWhiteSpace(Folder);
 

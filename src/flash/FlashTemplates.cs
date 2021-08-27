@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace flash
 {
-    public class Templates
+    public class FlashTemplates
     {
         internal static readonly string FlashTemplatesFolder =
             Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
-        private readonly List<Template> _items = new();
-        public IEnumerable<Template> Items => _items;
+        private readonly List<Template> _templates = new();
+        public IEnumerable<Template> Templates => _templates;
         public string ErrorMessage { get; private set; }
         public bool IsValid => ErrorMessage == null;
 
@@ -44,18 +44,18 @@ namespace flash
 
                 if (!await template.Validate())
                 {
-                    _items.Clear();
+                    _templates.Clear();
                     ErrorMessage = $"Invalid template '{template.Name}': {template.ErrorMessage}";
                     return;
                 }
 
-                _items.Add(template);
+                _templates.Add(template);
             }
         }
 
         public Template Get(string templateName)
         {
-            return Items.FirstOrDefault(item => item.Name == templateName);
+            return Templates.FirstOrDefault(item => item.Name == templateName);
         }
     }
 }

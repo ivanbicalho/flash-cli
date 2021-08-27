@@ -13,7 +13,7 @@ namespace flash.Commands
         
         protected override async Task Run(NewCommandArgs args)
         {
-            var templates = new Templates();
+            var templates = new FlashTemplates();
             await templates.Load();
             
             if (!templates.IsValid)
@@ -26,7 +26,7 @@ namespace flash.Commands
             if (template == null)
             {
                 Console.WriteLine("Invalid template name, available templates:");
-                foreach (var item in templates.Items)
+                foreach (var item in templates.Templates)
                     Console.WriteLine($"flash new {item.Name}");
                 
                 return;

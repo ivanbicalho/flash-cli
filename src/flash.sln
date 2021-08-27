@@ -1,0 +1,22 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "flash", "flash\flash.csproj", "{205625A1-D579-47F5-B3DB-393C0B57B517}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "flash.Tests", "flash.Tests\flash.Tests.csproj", "{4154C923-6746-40B5-8DDD-2ED2007DEEFA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{205625A1-D579-47F5-B3DB-393C0B57B517}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{205625A1-D579-47F5-B3DB-393C0B57B517}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{205625A1-D579-47F5-B3DB-393C0B57B517}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{205625A1-D579-47F5-B3DB-393C0B57B517}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4154C923-6746-40B5-8DDD-2ED2007DEEFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4154C923-6746-40B5-8DDD-2ED2007DEEFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4154C923-6746-40B5-8DDD-2ED2007DEEFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4154C923-6746-40B5-8DDD-2ED2007DEEFA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
