@@ -1,4 +1,6 @@
 using System;
+using System.IO;
+using System.Reflection;
 using System.Threading.Tasks;
 using flash.Models;
 using LightCli.Commands;
@@ -13,7 +15,7 @@ namespace flash.Commands
         
         protected override async Task Run(NewCommandArgs args)
         {
-            var templates = new FlashTemplates();
+            var templates = new FlashTemplates(Util.DefaultLocationFlashTemplatesFolder);
             await templates.Load();
             
             if (!templates.IsValid)

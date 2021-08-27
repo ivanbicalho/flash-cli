@@ -13,7 +13,7 @@ namespace flash.Commands
         
         protected override async Task Run(NoArgs args)
         {
-            var templates = new FlashTemplates();
+            var templates = new FlashTemplates(Util.DefaultLocationFlashTemplatesFolder);
             await templates.Load();
 
             if (templates.IsValid)
