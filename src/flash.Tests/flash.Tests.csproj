@@ -23,4 +23,36 @@
       <ProjectReference Include="..\flash\flash.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Content Include="InvalidTemplates\emptyCreations\use-case\config.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Include="InvalidTemplates\noConfigFormat\use-case\Teste.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <Content Include="InvalidTemplates\nonExistentFile\use-case\config.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="InvalidTemplates\invalidConfigFormat\use-case\config.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="InvalidTemplates\invalid\use-case\config.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="ValidTemplates\valid1\use-case\config.json" />
+      <Content Include="ValidTemplates\valid1\use-case\UseCaseNameInput.cs" />
+      <Content Include="ValidTemplates\valid1\use-case\UseCaseNameOutput.cs" />
+      <Content Include="ValidTemplates\valid1\use-case\UseCaseNameRequest.cs" />
+      <Compile Remove="InvalidTemplates\invalid1\use-case\UseCaseNameRequest.cs" />
+      <Compile Remove="InvalidTemplates\invalid1\use-case\UseCaseNameOutput.cs" />
+      <Compile Remove="InvalidTemplates\invalid1\use-case\UseCaseNameInput.cs" />
+      <None Update="InvalidTemplates\invalidConfigFormat2\use-case\Teste.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="InvalidTemplates\noTemplates" />
+    </ItemGroup>
+
 </Project>

@@ -1,0 +1,17 @@
+{
+    "creations": [
+        {
+            "file": "Teste.txt"
+        }
+    ],
+    "variables": [
+        {
+            "replace": "UseCaseName",
+            "question": "Digite o nome do caso de uso:"
+        },
+        {
+            "replace": "Repository",
+            "question": "Digite o nome do repositório:"
+        }
+    ]
+}

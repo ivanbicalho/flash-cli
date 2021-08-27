@@ -20,6 +20,7 @@ namespace flash
         private readonly List<Template> _templates = new();
         public IEnumerable<Template> Templates => _templates;
         public string ErrorMessage { get; private set; }
+        public string ErrorCode { get; private set; }
         public bool IsValid => ErrorMessage == null;
 
         public async Task Load()
@@ -27,10 +28,18 @@ namespace flash
             if (!Directory.Exists(_flashTemplatesFolderPath))
             {
                 ErrorMessage = "Folder 'flash-templates' does not exist. Create one next to the executable";
+                ErrorCode = "missed_flash_folder";
                 return;
             }
 
             var folders = Directory.GetDirectories(_flashTemplatesFolderPath);
+            if (!folders.Any())
+            {
+                ErrorMessage = "No templates were found in flash-templates folder";
+                ErrorCode = "missed_templates";
+                return;
+            }
+            
             foreach (var folder in folders)
             {
                 var templateName = new DirectoryInfo(folder).Name;
@@ -47,11 +56,13 @@ namespace flash
                 catch (FlashException flashEx)
                 {
                     ErrorMessage = $"Invalid template '{folder}': {flashEx.Message}";
+                    ErrorCode = flashEx.ErrorCode;
                     return;
                 }
                 catch
                 {
                     ErrorMessage = $"File 'config.json' doesn't exist or it's mal-formed in template folder '{templateName}'";
+                    ErrorCode = "invalid_config_json";
                     return;
                 }
 
