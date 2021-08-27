@@ -33,6 +33,7 @@ namespace flash
             var folders = Directory.GetDirectories(_flashTemplatesFolderPath);
             foreach (var folder in folders)
             {
+                var templateName = new DirectoryInfo(folder).Name;
                 Template template;
 
                 try
@@ -40,8 +41,7 @@ namespace flash
                     var json = await File.ReadAllTextAsync(Path.Combine(folder, "config.json"));
                     var model = JsonSerializer.Deserialize<TemplateModel>(json,
                         new JsonSerializerOptions() {PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
-
-                    var templateName = new DirectoryInfo(folder).Name;
+                    
                     template = model.ToDomainModel(templateName, _flashTemplatesFolderPath);
                 }
                 catch (FlashException flashEx)
@@ -51,7 +51,7 @@ namespace flash
                 }
                 catch
                 {
-                    ErrorMessage = $"File 'config.json' doesn't exist or it's mal-formed in template folder '{folder}'";
+                    ErrorMessage = $"File 'config.json' doesn't exist or it's mal-formed in template folder '{templateName}'";
                     return;
                 }
 

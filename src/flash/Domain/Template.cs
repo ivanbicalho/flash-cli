@@ -36,8 +36,16 @@ namespace flash
             {
                 if (creation.HasFile)
                 {
-                    var path = ReplaceVariables(creation.FilePath);
+                    var path = ReplaceVariables(creation.WritingPath);
                     var content = ReplaceVariables(await creation.GetFileContent());
+
+                    if (creation.HasFolder)
+                    {
+                        var folder = ReplaceVariables(creation.Folder);
+                        if (!Directory.Exists(folder))
+                            Directory.CreateDirectory(folder);
+                    }
+                    
                     await File.WriteAllTextAsync(path, content);
                 }
                 else

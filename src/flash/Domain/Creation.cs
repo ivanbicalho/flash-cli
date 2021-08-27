@@ -39,7 +39,8 @@ namespace flash
         public string FilePath => HasFile ? Path.Combine(_templateFolderPath, File) : string.Empty;
         public bool HasFile => !string.IsNullOrWhiteSpace(File);
         public bool HasFolder => !string.IsNullOrWhiteSpace(Folder);
-
+        public string WritingPath => Path.Combine(Folder ?? string.Empty, File ?? string.Empty);
+        
         public async Task<string> GetFileContent()
         {
             return await System.IO.File.ReadAllTextAsync(FilePath);
