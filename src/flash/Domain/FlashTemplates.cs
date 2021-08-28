@@ -1,12 +1,12 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Text.Json;
 using System.Threading.Tasks;
+using flash.Domain.Exceptions;
+using flash.Model;
 
-namespace flash
+namespace flash.Domain
 {
     public class FlashTemplates
     {

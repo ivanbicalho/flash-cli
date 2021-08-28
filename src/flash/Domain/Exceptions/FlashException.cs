@@ -1,6 +1,6 @@
 using System;
 
-namespace flash
+namespace flash.Domain.Exceptions
 {
     public class FlashException : Exception
     {

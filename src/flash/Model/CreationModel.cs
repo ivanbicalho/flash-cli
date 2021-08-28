@@ -1,7 +1,4 @@
-using System.IO;
-using System.Threading.Tasks;
-
-namespace flash
+namespace flash.Model
 {
     public class CreationModel
     {

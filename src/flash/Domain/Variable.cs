@@ -1,6 +1,7 @@
-using System.Reflection;
+using flash.Domain.Exceptions;
+using flash.Model;
 
-namespace flash
+namespace flash.Domain
 {
     public class Variable
     {

@@ -1,4 +1,4 @@
-namespace flash
+namespace flash.Model
 {
     public class VariableModel
     {

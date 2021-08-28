@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using flash.Domain;
 using LightCli.Args;
 using LightCli.Commands;
 

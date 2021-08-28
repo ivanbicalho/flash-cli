@@ -3,6 +3,7 @@ using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
 using flash.Commands;
+using flash.Domain;
 using Xunit;
 
 namespace flash.Tests

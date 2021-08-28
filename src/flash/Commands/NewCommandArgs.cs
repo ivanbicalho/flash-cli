@@ -1,8 +1,7 @@
-using System;
 using LightCli.Args;
 using LightCli.Attributes;
 
-namespace flash.Models
+namespace flash.Commands
 {
     public class NewCommandArgs : IArgs
     {

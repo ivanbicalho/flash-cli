@@ -1,9 +1,7 @@
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+using flash.Domain;
 
-namespace flash
+namespace flash.Model
 {
     public class TemplateModel
     {

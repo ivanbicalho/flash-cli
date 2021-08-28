@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
-using flash.Models;
+using flash.Domain;
 using LightCli.Commands;
 
 namespace flash.Commands

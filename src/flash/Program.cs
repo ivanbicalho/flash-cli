@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using flash.Commands;
-using flash.Models;
 using LightCli;
 
 namespace flash

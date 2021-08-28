@@ -1,4 +1,4 @@
-namespace flash
+namespace flash.Domain
 {
     public static class ErrorCodes
     {
