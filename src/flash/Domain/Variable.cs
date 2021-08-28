@@ -10,10 +10,10 @@ namespace flash
             Question = variableModel.Question;
             
             if (string.IsNullOrWhiteSpace(Replace))
-                throw new FlashException("Invalid 'variables', field replace cannot be null or empty", "invalid_replace");
+                throw new FlashException("Invalid 'variables', field replace cannot be null or empty", ErrorCodes.InvalidVariable);
         
             if (string.IsNullOrWhiteSpace(Question))
-                throw new FlashException("Invalid 'variables', field question cannot be null or empty", "invalid_question");
+                throw new FlashException("Invalid 'variables', field question cannot be null or empty", ErrorCodes.InvalidVariable);
         }
         
         public string Replace { get; }

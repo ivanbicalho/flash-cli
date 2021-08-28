@@ -45,6 +45,24 @@ namespace flash.Tests
             await InvalidTemplateTest("emptyCreations", ErrorCodes.EmptyCreations);
         }
 
+        [Fact]
+        public async Task InvalidFileFormatTest()
+        {
+            await InvalidTemplateTest("invalidFileFormat", ErrorCodes.InvalidFileOrFolderFormat);
+        }
+        
+        [Fact]
+        public async Task InvalidQuestionVariableTest()
+        {
+            await InvalidTemplateTest("invalidQuestionVariable", ErrorCodes.InvalidVariable);
+        }
+        
+        [Fact]
+        public async Task InvalidReplaceVariableTest()
+        {
+            await InvalidTemplateTest("invalidReplaceVariable", ErrorCodes.InvalidVariable);
+        }
+
         private async Task InvalidTemplateTest(string location, string errorCode)
         {
             var templateFolder = Path.Combine(

@@ -27,19 +27,25 @@
       <Content Include="InvalidTemplates\emptyCreations\use-case\config.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
-      <None Include="InvalidTemplates\missingTemplates\Teste.txt">
+      <Content Include="InvalidTemplates\invalidFileFormat\use-case\config.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="InvalidTemplates\invalidQuestionVariable\use-case\config.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="InvalidTemplates\invalidReplaceVariable\use-case\config.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Include="InvalidTemplates\missingTemplates\Test.txt">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Include="InvalidTemplates\noConfigFormat\use-case\Teste.txt">
+      <None Include="InvalidTemplates\noConfigFormat\use-case\Test.txt">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
       <Content Include="InvalidTemplates\missingCreationFile\use-case\config.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
       <Content Include="InvalidTemplates\invalidConfigFormat\use-case\config.json">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="InvalidTemplates\invalid\use-case\config.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
       <Content Include="ValidTemplates\valid1\use-case\config.json" />

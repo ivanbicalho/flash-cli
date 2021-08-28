@@ -6,31 +6,28 @@ namespace flash
     public class Creation
     {
         private readonly string _templateFolderPath;
-        
+
         public Creation(CreationModel creationModel, string templateFolderPath)
         {
             _templateFolderPath = templateFolderPath;
             Folder = creationModel.Folder;
             File = creationModel.File;
-            
+
             if (string.IsNullOrWhiteSpace(Folder) && string.IsNullOrWhiteSpace(File))
-                throw new FlashException("Invalid 'creations', file or folder have to have a value", ErrorCodes.InvalidCreationFields);
+                throw new FlashException("Invalid 'creations', file or folder have to have a value",
+                    ErrorCodes.InvalidCreationFields);
 
-            try
-            {
-                if (HasFolder)
-                    Directory.Exists(Folder);
+            if (HasFolder && Folder.IndexOfAny(Path.GetInvalidPathChars()) >= 0)
+                throw new FlashException($"Invalid 'creations', invalid format for folder",
+                    ErrorCodes.InvalidFileOrFolderFormat);
 
-                if (HasFile)
-                    System.IO.File.Exists(File);
-            }
-            catch
-            {
-                throw new FlashException($"Invalid 'creations', invalid format for file or folder", ErrorCodes.InvalidFormat);
-            }
+            if (HasFile && File.IndexOfAny(Path.GetInvalidFileNameChars()) >= 0)
+                throw new FlashException($"Invalid 'creations', invalid format for file",
+                    ErrorCodes.InvalidFileOrFolderFormat);
 
             if (!System.IO.File.Exists(FilePath))
-                throw new FlashException($"Invalid 'creations', file '{File}' doesn't exist", ErrorCodes.MissingCreationFile);
+                throw new FlashException($"Invalid 'creations', file '{File}' doesn't exist",
+                    ErrorCodes.MissingCreationFile);
         }
 
         public string Folder { get; }
@@ -40,7 +37,7 @@ namespace flash
         public bool HasFile => !string.IsNullOrWhiteSpace(File);
         public bool HasFolder => !string.IsNullOrWhiteSpace(Folder);
         public string WritingPath => Path.Combine(Folder ?? string.Empty, File ?? string.Empty);
-        
+
         public async Task<string> GetFileContent()
         {
             return await System.IO.File.ReadAllTextAsync(FilePath);
