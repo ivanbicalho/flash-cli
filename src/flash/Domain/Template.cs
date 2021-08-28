@@ -23,7 +23,7 @@ namespace flash
                 _variables.Add(new Variable(variableModel));
             
             if (!Creations.Any())
-                throw new FlashException("Array 'creations' cannot be null or empty", "invalid_creations_empty");
+                throw new FlashException("Array 'creations' cannot be null or empty", ErrorCodes.EmptyCreations);
         }
 
         public string Name { get; }

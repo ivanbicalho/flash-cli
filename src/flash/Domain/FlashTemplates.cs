@@ -28,7 +28,7 @@ namespace flash
             if (!Directory.Exists(_flashTemplatesFolderPath))
             {
                 ErrorMessage = "Folder 'flash-templates' does not exist. Create one next to the executable";
-                ErrorCode = "missed_flash_folder";
+                ErrorCode = ErrorCodes.MissingFlashTemplateFolder;
                 return;
             }
 
@@ -36,7 +36,7 @@ namespace flash
             if (!folders.Any())
             {
                 ErrorMessage = "No templates were found in flash-templates folder";
-                ErrorCode = "missed_templates";
+                ErrorCode = ErrorCodes.MissingTemplates;
                 return;
             }
             
@@ -62,7 +62,7 @@ namespace flash
                 catch
                 {
                     ErrorMessage = $"File 'config.json' doesn't exist or it's mal-formed in template folder '{templateName}'";
-                    ErrorCode = "invalid_config_json";
+                    ErrorCode = ErrorCodes.InvalidConfigFormat;
                     return;
                 }
 

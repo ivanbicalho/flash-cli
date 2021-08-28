@@ -12,67 +12,51 @@ namespace flash.Tests
         [Fact]
         public async Task NoFlashTemplatesFolderTest()
         {
-            var templates = await InvalidTemplateTest("noFlashTemplatesFolder");
-            Assert.False(templates.IsValid);
-            Assert.Equal("missed_flash_folder", templates.ErrorCode);
+            await InvalidTemplateTest("noFolder", ErrorCodes.MissingFlashTemplateFolder);
         }
-        
+
         [Fact]
         public async Task NoTemplatesTest()
         {
-            var templates = await InvalidTemplateTest("noTemplates");
-            Assert.False(templates.IsValid);
-            Assert.Equal("missed_templates", templates.ErrorCode);
+            await InvalidTemplateTest("missingTemplates", ErrorCodes.MissingTemplates);
         }
 
         [Fact]
         public async Task NonExistentFileTest()
         {
-            var templates = await InvalidTemplateTest("nonExistentFile");
-            Assert.False(templates.IsValid);
-            Assert.Equal("invalid_creation_missed_file", templates.ErrorCode);
+            await InvalidTemplateTest("missingCreationFile", ErrorCodes.MissingCreationFile);
         }
-        
+
         [Fact]
         public async Task InvalidConfigFormatTest()
         {
-            var templates = await InvalidTemplateTest("invalidConfigFormat");
-            Assert.False(templates.IsValid);
-            Assert.Equal("invalid_config_json", templates.ErrorCode);
+            await InvalidTemplateTest("invalidConfigFormat", ErrorCodes.InvalidConfigFormat);
         }
-        
+
         [Fact]
         public async Task NoConfigFormatTest()
         {
-            var templates = await InvalidTemplateTest("noConfigFormat");
-            Assert.False(templates.IsValid);
-            Assert.Equal("invalid_config_json", templates.ErrorCode);
+            await InvalidTemplateTest("noConfigFormat", ErrorCodes.InvalidConfigFormat);
         }
-        
+
         [Fact]
         public async Task EmptyCreationsTest()
         {
-            var templates = await InvalidTemplateTest("emptyCreations");
-            Assert.False(templates.IsValid);
-            Assert.Equal("invalid_creations_empty", templates.ErrorCode);
+            await InvalidTemplateTest("emptyCreations", ErrorCodes.EmptyCreations);
         }
 
-        private async Task<FlashTemplates> InvalidTemplateTest(string location)
+        private async Task InvalidTemplateTest(string location, string errorCode)
         {
             var templateFolder = Path.Combine(
                 Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
                 "InvalidTemplates",
                 location);
-            
+
             var templates = new FlashTemplates(templateFolder);
             await templates.Load();
 
-            return templates;
+            Assert.False(templates.IsValid);
+            Assert.Equal(errorCode, templates.ErrorCode);
         }
-        
-        // [Fact]
-        // public void SouldCreateFolder()
-        // {
-        // }
     }
 }

@@ -14,7 +14,7 @@ namespace flash
             File = creationModel.File;
             
             if (string.IsNullOrWhiteSpace(Folder) && string.IsNullOrWhiteSpace(File))
-                throw new FlashException("Invalid 'creations', file or folder have to have a value", "invalid_creation_fields");
+                throw new FlashException("Invalid 'creations', file or folder have to have a value", ErrorCodes.InvalidCreationFields);
 
             try
             {
@@ -26,11 +26,11 @@ namespace flash
             }
             catch
             {
-                throw new FlashException($"Invalid 'creations', invalid format for file or folder", "invalid_creation_format");
+                throw new FlashException($"Invalid 'creations', invalid format for file or folder", ErrorCodes.InvalidFormat);
             }
 
             if (!System.IO.File.Exists(FilePath))
-                throw new FlashException($"Invalid 'creations', file '{File}' doesn't exist", "invalid_creation_missed_file");
+                throw new FlashException($"Invalid 'creations', file '{File}' doesn't exist", ErrorCodes.MissingCreationFile);
         }
 
         public string Folder { get; }

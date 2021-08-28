@@ -27,10 +27,13 @@
       <Content Include="InvalidTemplates\emptyCreations\use-case\config.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
+      <None Include="InvalidTemplates\missingTemplates\Teste.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
       <None Include="InvalidTemplates\noConfigFormat\use-case\Teste.txt">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <Content Include="InvalidTemplates\nonExistentFile\use-case\config.json">
+      <Content Include="InvalidTemplates\missingCreationFile\use-case\config.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
       <Content Include="InvalidTemplates\invalidConfigFormat\use-case\config.json">
@@ -49,10 +52,6 @@
       <None Update="InvalidTemplates\invalidConfigFormat2\use-case\Teste.txt">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="InvalidTemplates\noTemplates" />
     </ItemGroup>
 
 </Project>
