@@ -1,16 +1,16 @@
-# Flash
+# Flash CLI
 
 ---
 
-Flash is command line interface to help you creating files and folders using your custom templates, in order to avoid repetitive tasks.
+Flash is a command line interface to help you creating files and folders using your custom template files, in order to avoid repetitive tasks.
 
 ## Creating your templates
 
 In this example we'll use txt and c# files, but you can define any kind of files.
 
-The flash CLI reads all folders inside the folder 'flash-templates', in which have to exists in the same directory as flash CLI.
+To create a new template, you just have to add a new folder inside de folder **flash-templates**, which have to located together with flash executable.
 
-Each folder became a new template. Inside the folder, you have to have a **config.json** and your files.
+Inside your folder, just put your template files and a **config.json**.
 
 The folder structure is like this:
 
@@ -20,7 +20,12 @@ flash-templates
         config.json
         Readme.txt
         UseCaseName.cs
+        UseCaseNameInput.cs
 ```
+
+## The config.json file
+
+The config.json file contains all of the template configuration, the name of the files you want to create, the location of them and your variables, which are optionals.
 
 The config.json structure example:
 
@@ -28,25 +33,28 @@ The config.json structure example:
 {
     "creations": [
         {
-            "file": "Readme.txt"
+            "templateFile": "Readme.txt"
         },
         {
-            "folder" : "Features/UseCaseName",
-            "file": "UseCaseName.cs"
+            "location" : "Features/UseCaseName",
+            "templateFile": "UseCaseName.cs"
         },
         {
-            "folder" : "Features/UseCaseName",
-            "file": "UseCaseNameInput.cs"
+            "location" : "Features/UseCaseName",
+            "templateFile": "UseCaseNameInput.cs"
+        },
+        {
+            "location": "EmptyFolderToCreate"
         }
     ],
     "variables": [
         {
             "replace": "UseCaseName",
-            "question": "Digite o nome do caso de uso:"
+            "question": "Enter the use case name:"
         },
         {
             "replace": "Repository",
-            "question": "Digite o nome do repositório:"
+            "question": "Enter the repository name:"
         }
     ]
 }
@@ -62,25 +70,28 @@ As you declared two variables **UseCaseName** and **Repository**, you will be as
 
 ```bash
 $ flash new use-case
-Digite o nome do caso de uso: MyFirstUseCase
-Digite o nome do repositório: MyRepo
+Enter the use case name: MyFirstUseCase
+Enter the repository name: MyRepo
 ```
+
+## The magic happening
 
 What will happen next?
 
-Everywhere the occurrence "UseCaseName" were found, it'll be replaced by "MyFirstUseCase", regardless if it's the folder name, file name, part file name, file content, etc.
+Whenever the occurrence "UseCaseName" is found, it'll be replaced by "MyFirstUseCase", regardless of whether it's the folder name, file name, part of the file name, file content, etc.
 
-At the current directory in the terminal, the structure will be:
+In the terminal's current directory, we'll have:
 
 ```
 Readme.txt
+EmptyFolderToCreate
 Features
     MyFirstUseCase
         MyFirstUseCase.cs
         MyFirstUseCaseInput.cs
 ```
 
-Let's suppose that inside of the file Readme.txt the initial value were:
+Let's suppose that inside the **Readme.txt** file the initial value was:
 
 ```
 Hello world! Your UseCaseName is good as also your repo Repository.
