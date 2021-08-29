@@ -20,5 +20,10 @@ namespace flash.Domain
         public string Replace { get; }
         public string Question { get; }
         public string Value { get; set; }
+
+        public bool IsValueValid()
+        {
+            return !string.IsNullOrWhiteSpace(Value);
+        }
     }
 }

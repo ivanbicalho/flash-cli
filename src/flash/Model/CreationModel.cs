@@ -2,7 +2,7 @@ namespace flash.Model
 {
     public class CreationModel
     {
-        public string Folder { get; set; }
-        public string File { get; set; }
+        public string Location { get; set; }
+        public string TemplateFile { get; set; }
     }
 }

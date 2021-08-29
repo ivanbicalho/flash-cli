@@ -24,10 +24,13 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Content Include="InvalidTemplates\emptyCreations\use-case\config.json">
+      <Content Include="InvalidTemplates\emptyArrayCreations\use-case\config.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
-      <Content Include="InvalidTemplates\invalidFileFormat\use-case\config.json">
+      <Content Include="InvalidTemplates\invalidCreationFields\use-case\config.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="InvalidTemplates\invalidTemplateFile\use-case\config.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
       <Content Include="InvalidTemplates\invalidQuestionVariable\use-case\config.json">
@@ -39,13 +42,13 @@
       <None Include="InvalidTemplates\missingTemplates\Test.txt">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Include="InvalidTemplates\noConfigFormat\use-case\Test.txt">
+      <None Include="InvalidTemplates\noConfigFile\use-case\Test.txt">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <Content Include="InvalidTemplates\missingCreationFile\use-case\config.json">
+      <Content Include="InvalidTemplates\missingTemplateFile\use-case\config.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
-      <Content Include="InvalidTemplates\invalidConfigFormat\use-case\config.json">
+      <Content Include="InvalidTemplates\invalidConfigFile\use-case\config.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
       <Content Include="ValidTemplates\valid1\use-case\config.json" />
@@ -56,6 +59,12 @@
       <Compile Remove="InvalidTemplates\invalid1\use-case\UseCaseNameOutput.cs" />
       <Compile Remove="InvalidTemplates\invalid1\use-case\UseCaseNameInput.cs" />
       <None Update="InvalidTemplates\invalidConfigFormat2\use-case\Teste.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="InvalidTemplates\invalidQuestionVariable\use-case\Test.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="InvalidTemplates\invalidReplaceVariable\use-case\Test.txt">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
     </ItemGroup>

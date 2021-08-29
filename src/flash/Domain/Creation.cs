@@ -12,37 +12,37 @@ namespace flash.Domain
         public Creation(CreationModel creationModel, string templateFolderPath)
         {
             _templateFolderPath = templateFolderPath;
-            Folder = creationModel.Folder;
-            File = creationModel.File;
+            Location = creationModel.Location;
+            TemplateFile = creationModel.TemplateFile;
 
-            if (string.IsNullOrWhiteSpace(Folder) && string.IsNullOrWhiteSpace(File))
-                throw new FlashException("Invalid 'creations', file or folder have to have a value",
+            if (string.IsNullOrWhiteSpace(Location) && string.IsNullOrWhiteSpace(TemplateFile))
+                throw new FlashException("Invalid 'creations', location or template file must have a value",
                     ErrorCodes.InvalidCreationFields);
 
-            if (HasFolder && Folder.IndexOfAny(Path.GetInvalidPathChars()) >= 0)
-                throw new FlashException($"Invalid 'creations', invalid format for folder",
-                    ErrorCodes.InvalidFileOrFolderFormat);
+            if (HasLocation && Location.IndexOfAny(Path.GetInvalidPathChars()) >= 0)
+                throw new FlashException($"Invalid 'creations', invalid format for location",
+                    ErrorCodes.InvalidLocationOrTemplateFile);
 
-            if (HasFile && File.IndexOfAny(Path.GetInvalidFileNameChars()) >= 0)
-                throw new FlashException($"Invalid 'creations', invalid format for file",
-                    ErrorCodes.InvalidFileOrFolderFormat);
+            if (HasTemplateFile && TemplateFile.IndexOfAny(Path.GetInvalidFileNameChars()) >= 0)
+                throw new FlashException($"Invalid 'creations', invalid format for template file",
+                    ErrorCodes.InvalidLocationOrTemplateFile);
 
-            if (!System.IO.File.Exists(FilePath))
-                throw new FlashException($"Invalid 'creations', file '{File}' doesn't exist",
-                    ErrorCodes.MissingCreationFile);
+            if (!System.IO.File.Exists(TemplateFilePath))
+                throw new FlashException($"Invalid 'creations', file '{TemplateFile}' doesn't exist",
+                    ErrorCodes.MissingTemplateFile);
         }
 
-        public string Folder { get; }
-        public string File { get; }
+        public string Location { get; }
+        public string TemplateFile { get; }
 
-        public string FilePath => HasFile ? Path.Combine(_templateFolderPath, File) : string.Empty;
-        public bool HasFile => !string.IsNullOrWhiteSpace(File);
-        public bool HasFolder => !string.IsNullOrWhiteSpace(Folder);
-        public string WritingPath => Path.Combine(Folder ?? string.Empty, File ?? string.Empty);
+        public string TemplateFilePath => HasTemplateFile ? Path.Combine(_templateFolderPath, TemplateFile) : string.Empty;
+        public bool HasTemplateFile => !string.IsNullOrWhiteSpace(TemplateFile);
+        public bool HasLocation => !string.IsNullOrWhiteSpace(Location);
+        public string WritingPath => Path.Combine(Location ?? string.Empty, TemplateFile ?? string.Empty);
 
         public async Task<string> GetFileContent()
         {
-            return await System.IO.File.ReadAllTextAsync(FilePath);
+            return await File.ReadAllTextAsync(TemplateFilePath);
         }
     }
 }

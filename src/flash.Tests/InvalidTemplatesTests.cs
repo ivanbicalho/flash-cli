@@ -13,43 +13,43 @@ namespace flash.Tests
         [Fact]
         public async Task NoFlashTemplatesFolderTest()
         {
-            await InvalidTemplateTest("noFolder", ErrorCodes.MissingFlashTemplateFolder);
+            await InvalidTemplateTest("aaa", ErrorCodes.MissingFlashTemplateFolder);
         }
 
         [Fact]
-        public async Task NoTemplatesTest()
+        public async Task MissingTemplatesTest()
         {
             await InvalidTemplateTest("missingTemplates", ErrorCodes.MissingTemplates);
         }
 
         [Fact]
-        public async Task NonExistentFileTest()
+        public async Task MissingTemplateFileTest()
         {
-            await InvalidTemplateTest("missingCreationFile", ErrorCodes.MissingCreationFile);
+            await InvalidTemplateTest("missingTemplateFile", ErrorCodes.MissingTemplateFile);
         }
 
         [Fact]
-        public async Task InvalidConfigFormatTest()
+        public async Task InvalidConfigFileTest()
         {
-            await InvalidTemplateTest("invalidConfigFormat", ErrorCodes.InvalidConfigFormat);
+            await InvalidTemplateTest("invalidConfigFile", ErrorCodes.InvalidConfigFile);
         }
 
         [Fact]
-        public async Task NoConfigFormatTest()
+        public async Task NoConfigFileTest()
         {
-            await InvalidTemplateTest("noConfigFormat", ErrorCodes.InvalidConfigFormat);
+            await InvalidTemplateTest("noConfigFile", ErrorCodes.InvalidConfigFile);
         }
 
         [Fact]
-        public async Task EmptyCreationsTest()
+        public async Task EmptyArrayCreationsTest()
         {
-            await InvalidTemplateTest("emptyCreations", ErrorCodes.EmptyCreations);
+            await InvalidTemplateTest("emptyArrayCreations", ErrorCodes.EmptyArrayCreations);
         }
 
         [Fact]
-        public async Task InvalidFileFormatTest()
+        public async Task InvalidTemplateFileTest()
         {
-            await InvalidTemplateTest("invalidFileFormat", ErrorCodes.InvalidFileOrFolderFormat);
+            await InvalidTemplateTest("invalidTemplateFile", ErrorCodes.InvalidLocationOrTemplateFile);
         }
         
         [Fact]
@@ -62,6 +62,12 @@ namespace flash.Tests
         public async Task InvalidReplaceVariableTest()
         {
             await InvalidTemplateTest("invalidReplaceVariable", ErrorCodes.InvalidVariable);
+        }
+        
+        [Fact]
+        public async Task InvalidCreationFieldsTest()
+        {
+            await InvalidTemplateTest("invalidCreationFields", ErrorCodes.InvalidCreationFields);
         }
 
         private async Task InvalidTemplateTest(string location, string errorCode)

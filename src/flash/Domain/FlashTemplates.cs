@@ -62,7 +62,7 @@ namespace flash.Domain
                 catch
                 {
                     ErrorMessage = $"File 'config.json' doesn't exist or it's mal-formed in template folder '{templateName}'";
-                    ErrorCode = ErrorCodes.InvalidConfigFormat;
+                    ErrorCode = ErrorCodes.InvalidConfigFile;
                     return;
                 }
 

@@ -25,7 +25,7 @@ namespace flash.Domain
                 _variables.Add(new Variable(variableModel));
             
             if (!Creations.Any())
-                throw new FlashException("Array 'creations' cannot be null or empty", ErrorCodes.EmptyCreations);
+                throw new FlashException("Array 'creations' cannot be null or empty", ErrorCodes.EmptyArrayCreations);
         }
 
         public string Name { get; }
@@ -34,16 +34,19 @@ namespace flash.Domain
 
         public async Task Create()
         {
+            if (!IsValidVariables())
+                throw new FlashException("No variable can be null or empty", ErrorCodes.InvalidVariable);
+            
             foreach (var creation in Creations)
             {
-                if (creation.HasFile)
+                if (creation.HasTemplateFile)
                 {
                     var path = ReplaceVariables(creation.WritingPath);
                     var content = ReplaceVariables(await creation.GetFileContent());
 
-                    if (creation.HasFolder)
+                    if (creation.HasLocation)
                     {
-                        var folder = ReplaceVariables(creation.Folder);
+                        var folder = ReplaceVariables(creation.Location);
                         if (!Directory.Exists(folder))
                             Directory.CreateDirectory(folder);
                     }
@@ -52,11 +55,16 @@ namespace flash.Domain
                 }
                 else
                 {
-                    var path = ReplaceVariables(creation.Folder);
+                    var path = ReplaceVariables(creation.Location);
                     if (!Directory.Exists(path))
                         Directory.CreateDirectory(path);
                 }
             }
+        }
+
+        private bool IsValidVariables()
+        {
+            return Variables.Any(v => !v.IsValueValid());
         }
 
         private string ReplaceVariables(string content)

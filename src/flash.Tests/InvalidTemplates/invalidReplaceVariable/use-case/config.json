@@ -1,7 +1,7 @@
 {
     "creations": [
         {
-            "file": "Test.txt"
+            "templateFile": "Test.txt"
         }
     ],
     "variables" : [
