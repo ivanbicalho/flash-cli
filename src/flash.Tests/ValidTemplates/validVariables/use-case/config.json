@@ -1,0 +1,32 @@
+{
+    "creations": [
+        {
+            "templateFile": "Test.txt"
+        },
+        {
+            "location": "MyFolder/Test",
+            "templateFile": "Test.txt"
+        },
+        {
+            "location": "MyFolder",
+            "templateFile": "Test2.txt"
+        },
+        {
+            "location": "test",
+            "templateFile": "Test2.txt"
+        },
+        {
+            "location": "FolderToCreate"
+        },
+        {
+            "location": "",
+            "templateFile" : "MyFile.txt"
+        }
+    ],
+    "variables": [
+        {
+            "replace": "Test",
+            "question": "Enter the test name:"
+        }
+    ]
+}

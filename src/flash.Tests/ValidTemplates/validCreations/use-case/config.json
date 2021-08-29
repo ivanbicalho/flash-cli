@@ -1,0 +1,8 @@
+{
+    "creations": [
+        {
+            "location": "MyFolder/MySubFolder",
+            "templateFile": "Test.txt"
+        }
+    ]
+}

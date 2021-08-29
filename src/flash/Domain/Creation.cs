@@ -27,7 +27,7 @@ namespace flash.Domain
                 throw new FlashException($"Invalid 'creations', invalid format for template file",
                     ErrorCodes.InvalidLocationOrTemplateFile);
 
-            if (!System.IO.File.Exists(TemplateFilePath))
+            if (HasTemplateFile && !File.Exists(TemplateFilePath))
                 throw new FlashException($"Invalid 'creations', file '{TemplateFile}' doesn't exist",
                     ErrorCodes.MissingTemplateFile);
         }

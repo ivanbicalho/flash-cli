@@ -64,7 +64,7 @@ namespace flash.Domain
 
         private bool IsValidVariables()
         {
-            return Variables.Any(v => !v.IsValueValid());
+            return Variables.All(v => v.IsValueValid());
         }
 
         private string ReplaceVariables(string content)

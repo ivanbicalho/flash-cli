@@ -39,6 +39,12 @@
       <Content Include="InvalidTemplates\invalidReplaceVariable\use-case\config.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
+      <Content Include="ValidTemplates\validCreations\use-case\config.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="ValidTemplates\validVariables\use-case\config.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
       <None Include="InvalidTemplates\missingTemplates\Test.txt">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
@@ -51,10 +57,6 @@
       <Content Include="InvalidTemplates\invalidConfigFile\use-case\config.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
-      <Content Include="ValidTemplates\valid1\use-case\config.json" />
-      <Content Include="ValidTemplates\valid1\use-case\UseCaseNameInput.cs" />
-      <Content Include="ValidTemplates\valid1\use-case\UseCaseNameOutput.cs" />
-      <Content Include="ValidTemplates\valid1\use-case\UseCaseNameRequest.cs" />
       <Compile Remove="InvalidTemplates\invalid1\use-case\UseCaseNameRequest.cs" />
       <Compile Remove="InvalidTemplates\invalid1\use-case\UseCaseNameOutput.cs" />
       <Compile Remove="InvalidTemplates\invalid1\use-case\UseCaseNameInput.cs" />
@@ -65,6 +67,24 @@
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
       <None Update="InvalidTemplates\invalidReplaceVariable\use-case\Test.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="ValidTemplates\invalidQuestionVariable\use-case\Test.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="ValidTemplates\ValidQuestionVariable\use-case\Test.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="ValidTemplates\validCreations\use-case\Test.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="ValidTemplates\validVariables\use-case\Test.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="ValidTemplates\validVariables\use-case\Test2.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="ValidTemplates\validVariables\use-case\MyFile.txt">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
     </ItemGroup>
