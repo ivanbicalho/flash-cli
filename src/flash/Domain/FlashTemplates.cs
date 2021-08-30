@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text.Json;
 using System.Threading.Tasks;
 using flash.Domain.Exceptions;
@@ -11,10 +12,12 @@ namespace flash.Domain
     public class FlashTemplates
     {
         private readonly string _flashTemplatesFolderPath;
-
-        public FlashTemplates(string flashTemplatesFolderPath)
+        
+        public FlashTemplates(string flashTemplatesFolderPath = null)
         {
-            _flashTemplatesFolderPath = flashTemplatesFolderPath;
+            _flashTemplatesFolderPath = flashTemplatesFolderPath ?? Path.Combine(
+                Path.GetDirectoryName(System.AppContext.BaseDirectory),
+                "flash-templates");
         }
 
         private readonly List<Template> _templates = new();
@@ -55,7 +58,7 @@ namespace flash.Domain
                 }
                 catch (FlashException flashEx)
                 {
-                    ErrorMessage = $"Invalid template '{folder}': {flashEx.Message}";
+                    ErrorMessage = $"Invalid template '{templateName}': {flashEx.Message}";
                     ErrorCode = flashEx.ErrorCode;
                     return;
                 }
