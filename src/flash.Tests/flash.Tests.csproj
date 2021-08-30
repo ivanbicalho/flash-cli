@@ -87,6 +87,9 @@
       <None Update="ValidTemplates\validVariables\use-case\MyFile.txt">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+      <None Update="ValidTemplates\validVariables\use-case\Variables.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>

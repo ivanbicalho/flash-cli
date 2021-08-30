@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using flash.Domain.Exceptions;
+using flash.Functions;
 using flash.Model;
 
 namespace flash.Domain
@@ -17,13 +19,13 @@ namespace flash.Domain
             Name = name;
 
             var templateFolderPath = Path.Combine(flashTemplatesFolderPath, name);
-            
+
             foreach (var creationModel in model.Creations)
                 _creations.Add(new Creation(creationModel, templateFolderPath));
-            
+
             foreach (var variableModel in model.Variables)
                 _variables.Add(new Variable(variableModel));
-            
+
             if (!Creations.Any())
                 throw new FlashException("Array 'creations' cannot be null or empty", ErrorCodes.EmptyArrayCreations);
         }
@@ -35,8 +37,8 @@ namespace flash.Domain
         public async Task Create()
         {
             if (!IsValidVariables())
-                throw new FlashException("No variable can be null or empty", ErrorCodes.InvalidVariable);
-            
+                throw new FlashException("No variable can be null or empty", ErrorCodes.UnassignedVariables);
+
             foreach (var creation in Creations)
             {
                 if (creation.HasTemplateFile)
@@ -50,7 +52,7 @@ namespace flash.Domain
                         if (!Directory.Exists(folder))
                             Directory.CreateDirectory(folder);
                     }
-                    
+
                     await File.WriteAllTextAsync(path, content);
                 }
                 else
@@ -71,10 +73,24 @@ namespace flash.Domain
         {
             foreach (var variable in Variables)
             {
-                content = content.Replace(variable.Replace, variable.Value);
+                Replace(ref content, variable.Replace, variable.Value);
+                ApplyFuncions(ref content, variable.Value);
             }
 
             return content;
+        }
+
+        private void Replace(ref string content, string replace, string value)
+        {
+            content = content.Replace(replace, value);
+        }
+        
+        private void ApplyFuncions(ref string content, string value)
+        {
+            foreach (var f in Functions.Functions.List())
+            {
+                Replace(ref content, f.Search(value), f.Apply(value));
+            }
         }
     }
 }

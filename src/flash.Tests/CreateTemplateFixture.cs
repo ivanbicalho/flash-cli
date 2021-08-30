@@ -31,6 +31,7 @@ namespace flash.Tests
         {
             File.Delete("NewTest.txt");
             File.Delete("MyFile.txt");
+            File.Delete("Variables.txt");
             Directory.Delete("MyFolder", true);
             Directory.Delete("test", true);
             Directory.Delete("FolderToCreate", true);

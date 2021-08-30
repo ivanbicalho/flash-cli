@@ -22,7 +22,7 @@ namespace flash.Tests
                 await template.Create();
             });
             
-            Assert.Equal(ErrorCodes.InvalidVariable, ex.ErrorCode);
+            Assert.Equal(ErrorCodes.UnassignedVariables, ex.ErrorCode);
         }
 
         private async Task<FlashTemplates> GetValidFlashTemplates(string location)

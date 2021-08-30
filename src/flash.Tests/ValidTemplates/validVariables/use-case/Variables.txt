@@ -1,0 +1,1 @@
+variable Test, lower(Test), upper(Test), camel(Test), pascal(Test)

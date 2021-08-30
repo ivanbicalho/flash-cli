@@ -64,5 +64,14 @@ namespace flash.Tests
             var content = await File.ReadAllTextAsync("MyFile.txt");
             Assert.Equal("just my file", content);
         }
+        
+        [Fact]
+        public async Task ValidateVariablesTest()
+        {
+            Assert.True(File.Exists("Variables.txt"));
+            
+            var content = await File.ReadAllTextAsync("Variables.txt");
+            Assert.Equal("variable NewTest, newtest, NEWTEST, newTest, NewTest", content);
+        }
     }
 }
