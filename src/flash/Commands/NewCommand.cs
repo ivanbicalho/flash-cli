@@ -27,9 +27,11 @@ namespace flash.Commands
             var template = templates.Get(args.TemplateName);
             if (template == null)
             {
-                Console.WriteLine("Invalid template name, available templates:");
-                foreach (var item in templates.Templates)
-                    Console.WriteLine($"flash new {item.Name}");
+                Console.WriteLine("Invalid template name");
+                Console.WriteLine("Available templates:");
+                
+                foreach (var t in templates.Templates)
+                    Console.WriteLine($"   flash new {t.Name}");
                 
                 return;
             }

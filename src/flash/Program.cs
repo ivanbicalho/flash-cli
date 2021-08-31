@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using flash.Commands;
 using LightCli;
+using LightCli.Commands;
 
 namespace flash
 {
@@ -10,10 +11,11 @@ namespace flash
         static async Task Main(string[] args)
         {
             var runner = new CliRunner();
-            
+
             runner
                 .AddCommand(new NewCommand())
-                .AddCommand(new ValidateCommand());
+                .AddCommand(new ValidateCommand())
+                .AddVersionCommand();
 
             var result = await runner.Run(args);
             

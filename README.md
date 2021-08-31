@@ -102,3 +102,40 @@ After the execution, it'll be:
 ```
 Hello world! Your MyFirstUseCase is good as also your repo MyRepo.
 ```
+
+## Special Functions
+
+There are some special variables that can be used in file templates. They are:
+
+- **camel(VariableName)** = Puts the first character from a variable as lower case
+- **pascal(VariableName)** = Puts the first character from a variable as upper case
+- **lower(VariableName)** = Puts all characters from a variable as lower case
+- **upper(VariableName)** = Puts all characters from a variable as upper case
+
+With these functions, you get more flexibility on the template file, allowing doing things like this: 
+
+```csharp
+public class MyUseCase
+{
+    private readonly IMyUseCaseRepository _camel(MyUseCase)Repository;
+
+    public MyUseCase(IMyUseCaseRepository camel(MyUseCase)Repository)
+    {
+        _camel(FeatureName)Repository = camel(FeatureName)Repository;
+    }
+}
+```
+
+Considering the value of "MyUseCase" as "SaveCustomer", the result would be:
+
+```csharp
+public class SaveCustomer
+{
+    private readonly ISaveCustomerRepository _saveCustomerRepository;
+
+    public SaveCustomer(ISaveCustomerRepository saveCustomerRepository)
+    {
+        _saveCustomerRepository = saveCustomerRepository
+    }
+}
+```
