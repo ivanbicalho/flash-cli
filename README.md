@@ -23,6 +23,8 @@ flash-templates
         UseCaseNameInput.cs
 ```
 
+With the structure above, you can use the "use-case" template.
+
 ## The config.json file
 
 The config.json file contains all of the template configuration, the name of the files you want to create, the location of them and your variables, which are optionals.
@@ -78,7 +80,7 @@ Enter the repository name: MyRepo
 
 What will happen next?
 
-Whenever the occurrence "UseCaseName" is found, it'll be replaced by "MyFirstUseCase", regardless of whether it's the folder name, file name, part of the file name, file content, etc.
+Whenever the occurrence "UseCaseName" is found, it'll be replaced by "MyFirstUseCase", regardless of whether it's the folder name, file name, part of the file name, file content, etc. The same will occur with the "Repository" variable.
 
 In the terminal's current directory, we'll have:
 
@@ -121,7 +123,7 @@ public class MyUseCase
 
     public MyUseCase(IMyUseCaseRepository camel(MyUseCase)Repository)
     {
-        _camel(FeatureName)Repository = camel(FeatureName)Repository;
+        _camel(MyUseCase)Repository = camel(MyUseCase)Repository;
     }
 }
 ```
