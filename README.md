@@ -8,7 +8,7 @@ Flash is a command line interface to help you creating files and folders using y
 
 In this example we'll use txt and c# files, but you can define any kind of files.
 
-To create a new template, you just have to add a new folder inside de folder **flash-templates**, which have to located together with flash executable.
+To create a new template, you just have to add a new folder inside the folder **flash-templates**, which has to be located together with flash executable.
 
 Inside your folder, just put your template files and a **config.json**.
 
