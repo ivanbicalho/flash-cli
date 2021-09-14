@@ -26,11 +26,18 @@ namespace flash
             
             if (result.Command == null)
             {
-                runner.ShowDefaultAvailableCommandsMessage();
+                ShowAvailableCommandsMessage(runner);
                 return;
             }
-            
+
             result.Command.ShowDefaultHelp();
+        }
+
+        private static void ShowAvailableCommandsMessage(CliRunner runner)
+        {
+            runner.ShowDefaultAvailableCommandsMessage();
+            Console.WriteLine();
+            Console.WriteLine("Questions? See the docs: https://github.com/ivanbicalho/flash-cli");
         }
     }
 }
