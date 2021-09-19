@@ -25,12 +25,13 @@ namespace flash.Tests.Fixtures
 
         public void Dispose()
         {
-            File.Delete("NewTest.txt");
             File.Delete("MyFile.txt");
+            File.Delete("NewTest2.txt");
             File.Delete("Variables.txt");
-            Directory.Delete("MyFolder", true);
-            Directory.Delete("test", true);
-            Directory.Delete("FolderToCreate", true);
+            
+            Directory.Delete("AnotherFolder", true);
+            Directory.Delete("Folder", true);
+            Directory.Delete("NEWTEST", true);
         }
     }
 }

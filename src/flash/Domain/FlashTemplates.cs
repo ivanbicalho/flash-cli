@@ -97,7 +97,7 @@ namespace flash.Domain
             if (!items.Any())
                 return true;
 
-            if (items.Count() == 1 && items.First() == Consts.ConfigFile)
+            if (items.Count() == 1 && new FileInfo(items.First()).Name == Consts.ConfigFile)
                 return true;
 
             return false;

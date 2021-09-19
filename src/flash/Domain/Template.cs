@@ -53,9 +53,10 @@ namespace flash.Domain
             var directories = System.IO.Directory.GetDirectories(directory);
             foreach (var d in directories)
             {
-                var path = ReplaceVariables(GetDirectoryPath(baseDirectory, d));
-                if (!System.IO.Directory.Exists(path))
-                    System.IO.Directory.CreateDirectory(path);
+                var path = GetDirectoryPath(baseDirectory, d);
+                var replacedPath = ReplaceVariables(GetDirectoryPath(baseDirectory, d));
+                if (!System.IO.Directory.Exists(replacedPath))
+                    System.IO.Directory.CreateDirectory(replacedPath);
                 
                 await CreateAll(path, d);
             }

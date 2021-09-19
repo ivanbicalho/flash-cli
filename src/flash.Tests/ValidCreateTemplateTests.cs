@@ -10,10 +10,10 @@ namespace flash.Tests
         [Fact]
         public async Task ValidateRootFileNewTestTest()
         {
-            Assert.True(File.Exists("NewTest.txt"));
+            Assert.True(File.Exists("NewTest2.txt"));
 
-            var content = await File.ReadAllTextAsync("NewTest.txt");
-            Assert.Equal("test is different from NewTest", content);
+            var content = await File.ReadAllTextAsync("NewTest2.txt");
+            Assert.Equal("test2 is different from NewTest2", content);
         }
         
         [Fact]
@@ -52,24 +52,24 @@ namespace flash.Tests
             Assert.True(File.Exists("Folder/NewTest.txt"));
             Assert.True(File.Exists("Folder/NewTestN2/NewTest2.txt"));
 
-            var content = await File.ReadAllTextAsync("NewTest/NewTest.txt");
+            var content = await File.ReadAllTextAsync("Folder/NewTest.txt");
             Assert.Equal("test is different from NewTest", content);
             
-            content = await File.ReadAllTextAsync("NewTest/NewTestN2/NewTest2.txt");
+            content = await File.ReadAllTextAsync("Folder/NewTestN2/NewTest2.txt");
             Assert.Equal("test2 is different from NewTest2", content);
         }
         
         [Fact]
         public async Task ValidateFilesLowerUpperCaseTest()
         {
-            Assert.True(Directory.Exists("TEST"));
-            Assert.True(File.Exists("TEST/test.txt"));
-            Assert.True(File.Exists("TEST/test2.txt"));
+            Assert.True(Directory.Exists("NEWTEST"));
+            Assert.True(File.Exists("NEWTEST/newtest.txt"));
+            Assert.True(File.Exists("NEWTEST/newTest2.txt"));
             
-            var content = await File.ReadAllTextAsync("TEST/test.txt");
+            var content = await File.ReadAllTextAsync("NEWTEST/newtest.txt");
             Assert.Equal("empty", content);
             
-            content = await File.ReadAllTextAsync("TEST/test2.txt");
+            content = await File.ReadAllTextAsync("NEWTEST/newTest2.txt");
             Assert.Equal("empty", content);
         }
     }
