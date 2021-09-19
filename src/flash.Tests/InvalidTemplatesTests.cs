@@ -23,35 +23,11 @@ namespace flash.Tests
         }
 
         [Fact]
-        public async Task MissingTemplateFileTest()
-        {
-            await InvalidTemplateTest("missingTemplateFile", ErrorCodes.MissingTemplateFile);
-        }
-
-        [Fact]
         public async Task InvalidConfigFileTest()
         {
             await InvalidTemplateTest("invalidConfigFile", ErrorCodes.InvalidConfigFile);
         }
 
-        [Fact]
-        public async Task NoConfigFileTest()
-        {
-            await InvalidTemplateTest("noConfigFile", ErrorCodes.InvalidConfigFile);
-        }
-
-        [Fact]
-        public async Task EmptyArrayCreationsTest()
-        {
-            await InvalidTemplateTest("emptyArrayCreations", ErrorCodes.EmptyArrayCreations);
-        }
-
-        [Fact]
-        public async Task InvalidTemplateFileTest()
-        {
-            await InvalidTemplateTest("invalidTemplateFile", ErrorCodes.InvalidLocationOrTemplateFile);
-        }
-        
         [Fact]
         public async Task InvalidQuestionVariableTest()
         {
@@ -62,12 +38,6 @@ namespace flash.Tests
         public async Task InvalidReplaceVariableTest()
         {
             await InvalidTemplateTest("invalidReplaceVariable", ErrorCodes.InvalidVariable);
-        }
-        
-        [Fact]
-        public async Task InvalidCreationFieldsTest()
-        {
-            await InvalidTemplateTest("invalidCreationFields", ErrorCodes.InvalidCreationFields);
         }
 
         private async Task InvalidTemplateTest(string location, string errorCode)

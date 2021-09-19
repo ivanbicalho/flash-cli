@@ -10,7 +10,7 @@ In this example we'll use txt and c# files, but you can define any kind of files
 
 To create a new template, you just have to add a new folder inside the folder **flash-templates**, which has to be located together with flash executable.
 
-Inside your folder, just put your template files and a **config.json**.
+Inside your folder, just put your template files and directories and a **config.json** (optional).
 
 The folder structure is like this:
 
@@ -19,44 +19,35 @@ flash-templates
     use-case
         config.json
         Readme.txt
-        UseCaseName.cs
-        UseCaseNameInput.cs
+        EmptyFolderToCreate
+        UseCaseName
+            UseCaseName.cs
+            UseCaseNameInput.cs
 ```
 
 With the structure above, you can use the "use-case" template.
 
 ## The config.json file
 
-The config.json file contains all of the template configuration, the name of the files you want to create, the location of them and your variables, which are optionals.
+The config.json file is optional and contains all of the template configuration, which are the template's description and variables.
+
+The template's description will be show to user when it interacts with the flash CLI, to help it to understand what that template does.
+
+The variables are used to replace the occurrences on the template files and directories.
 
 The config.json structure example:
 
 ```json
 {
-    "creations": [
+    "description" : "Create a use case based on clean architecture",
+    "variables" : [
         {
-            "templateFile": "Readme.txt"
+            "replace" : "UseCaseName",
+            "question" : "Enter the use case name:"
         },
         {
-            "location" : "Features/UseCaseName",
-            "templateFile": "UseCaseName.cs"
-        },
-        {
-            "location" : "Features/UseCaseName",
-            "templateFile": "UseCaseNameInput.cs"
-        },
-        {
-            "location": "EmptyFolderToCreate"
-        }
-    ],
-    "variables": [
-        {
-            "replace": "UseCaseName",
-            "question": "Enter the use case name:"
-        },
-        {
-            "replace": "Repository",
-            "question": "Enter the repository name:"
+            "replace" : "Repository",
+            "question" : "Enter the repository name:"
         }
     ]
 }
@@ -73,7 +64,6 @@ As you declared two variables **UseCaseName** and **Repository**, you will be as
 ```bash
 $ flash new use-case
 Enter the use case name: MyFirstUseCase
-Enter the repository name: MyRepo
 ```
 
 ## The magic happening
@@ -87,10 +77,9 @@ In the terminal's current directory, we'll have:
 ```
 Readme.txt
 EmptyFolderToCreate
-Features
-    MyFirstUseCase
-        MyFirstUseCase.cs
-        MyFirstUseCaseInput.cs
+MyFirstUseCase
+    MyFirstUseCase.cs
+    MyFirstUseCaseInput.cs
 ```
 
 Let's suppose that inside the **Readme.txt** file the initial value was:

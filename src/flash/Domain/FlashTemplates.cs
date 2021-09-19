@@ -55,7 +55,7 @@ namespace flash.Domain
                     return;
                 }
 
-                var config = Path.Combine(folder, "config.json");
+                var config = Path.Combine(folder, Consts.ConfigFile);
 
                 if (!File.Exists(config))
                 {
@@ -81,7 +81,7 @@ namespace flash.Domain
                 catch
                 {
                     ErrorMessage =
-                        $"File 'config.json' is mal-formed in template folder '{templateName}'";
+                        $"File '{Consts.ConfigFile}' is mal-formed in template folder '{templateName}'";
                     ErrorCode = ErrorCodes.InvalidConfigFile;
                     return;
                 }
@@ -97,7 +97,7 @@ namespace flash.Domain
             if (!items.Any())
                 return true;
 
-            if (items.Count() == 1 && items.First() == "config.json")
+            if (items.Count() == 1 && items.First() == Consts.ConfigFile)
                 return true;
 
             return false;

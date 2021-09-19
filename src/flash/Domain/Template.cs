@@ -34,15 +34,18 @@ namespace flash.Domain
             if (!IsValidVariables())
                 throw new FlashException("No variable can be null or empty", ErrorCodes.UnassignedVariables);
 
-            await CreateAll(Directory);
+            await CreateAll(string.Empty, Directory);
         }
 
-        private async Task CreateAll(string directory)
+        private async Task CreateAll(string baseDirectory, string directory)
         {
             var files = System.IO.Directory.GetFiles(directory);
             foreach (var file in files)
             {
-                var path = ReplaceVariables(file);
+                if (IsConfigFile(baseDirectory, file))
+                    continue;
+                
+                var path = ReplaceVariables(GetFilePath(baseDirectory, file));
                 var content = ReplaceVariables(await File.ReadAllTextAsync(file));
                 await File.WriteAllTextAsync(path, content);
             }
@@ -50,12 +53,27 @@ namespace flash.Domain
             var directories = System.IO.Directory.GetDirectories(directory);
             foreach (var d in directories)
             {
-                var path = ReplaceVariables(d);
+                var path = ReplaceVariables(GetDirectoryPath(baseDirectory, d));
                 if (!System.IO.Directory.Exists(path))
                     System.IO.Directory.CreateDirectory(path);
                 
-                await CreateAll(d);
+                await CreateAll(path, d);
             }
+        }
+
+        private bool IsConfigFile(string baseDirectory, string file)
+        {
+            return baseDirectory == string.Empty && new FileInfo(file).Name == Consts.ConfigFile;
+        }
+
+        private string GetFilePath(string baseDirectory, string file)
+        {
+            return Path.Combine(baseDirectory, new FileInfo(file).Name);
+        }
+        
+        private string GetDirectoryPath(string baseDirectory, string directory)
+        {
+            return Path.Combine(baseDirectory, new DirectoryInfo(directory).Name);
         }
 
         private bool IsValidVariables()
