@@ -12,7 +12,7 @@ namespace flash.Domain
     public class FlashTemplates
     {
         private readonly string _flashTemplatesFolderPath;
-        
+
         public FlashTemplates(string flashTemplatesFolderPath = null)
         {
             _flashTemplatesFolderPath = flashTemplatesFolderPath ?? Path.Combine(
@@ -42,18 +42,34 @@ namespace flash.Domain
                 ErrorCode = ErrorCodes.MissingTemplates;
                 return;
             }
-            
+
             foreach (var folder in folders)
             {
                 var templateName = new DirectoryInfo(folder).Name;
                 Template template;
 
+                if (EmptyDirectory(folder))
+                {
+                    ErrorMessage = $"Empty template: no files to create in template folder '{templateName}'";
+                    ErrorCode = ErrorCodes.EmptyTemplate;
+                    return;
+                }
+
+                var config = Path.Combine(folder, "config.json");
+
+                if (!File.Exists(config))
+                {
+                    template = new Template(templateName, null, _flashTemplatesFolderPath, new TemplateModel());
+                    _templates.Add(template);
+                    continue;
+                }
+
                 try
                 {
-                    var json = await File.ReadAllTextAsync(Path.Combine(folder, "config.json"));
+                    var json = await File.ReadAllTextAsync(config);
                     var model = JsonSerializer.Deserialize<TemplateModel>(json,
                         new JsonSerializerOptions() {PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
-                    
+
                     template = model.ToDomainModel(templateName, _flashTemplatesFolderPath);
                 }
                 catch (FlashException flashEx)
@@ -64,13 +80,27 @@ namespace flash.Domain
                 }
                 catch
                 {
-                    ErrorMessage = $"File 'config.json' doesn't exist or it's mal-formed in template folder '{templateName}'";
+                    ErrorMessage =
+                        $"File 'config.json' is mal-formed in template folder '{templateName}'";
                     ErrorCode = ErrorCodes.InvalidConfigFile;
                     return;
                 }
-
+                
                 _templates.Add(template);
             }
+        }
+
+        private bool EmptyDirectory(string folder)
+        {
+            var items = Directory.EnumerateFileSystemEntries(folder);
+
+            if (!items.Any())
+                return true;
+
+            if (items.Count() == 1 && items.First() == "config.json")
+                return true;
+
+            return false;
         }
 
         public Template Get(string templateName)

@@ -11,27 +11,22 @@ namespace flash.Domain
 {
     public class Template
     {
-        private List<Creation> _creations = new();
         private List<Variable> _variables = new();
 
-        public Template(string name, string flashTemplatesFolderPath, TemplateModel model)
+        public Template(string name, string description, string flashTemplatesFolderPath, TemplateModel model)
         {
             Name = name;
-
-            var templateFolderPath = Path.Combine(flashTemplatesFolderPath, name);
-
-            foreach (var creationModel in model.Creations)
-                _creations.Add(new Creation(creationModel, templateFolderPath));
-
+            Description = description;
+            Directory = Path.Combine(flashTemplatesFolderPath, name);
+            
             foreach (var variableModel in model.Variables)
                 _variables.Add(new Variable(variableModel));
-
-            if (!Creations.Any())
-                throw new FlashException("Array 'creations' cannot be null or empty", ErrorCodes.EmptyArrayCreations);
         }
 
+        public string Directory { get; }
+        public string Description { get; }
         public string Name { get; }
-        public IEnumerable<Creation> Creations => _creations;
+        public bool HasDescription => !string.IsNullOrWhiteSpace(Description);
         public IEnumerable<Variable> Variables => _variables;
 
         public async Task Create()
@@ -39,28 +34,27 @@ namespace flash.Domain
             if (!IsValidVariables())
                 throw new FlashException("No variable can be null or empty", ErrorCodes.UnassignedVariables);
 
-            foreach (var creation in Creations)
+            await CreateAll(Directory);
+        }
+
+        private async Task CreateAll(string directory)
+        {
+            var files = System.IO.Directory.GetFiles(directory);
+            foreach (var file in files)
             {
-                if (creation.HasTemplateFile)
-                {
-                    var path = ReplaceVariables(creation.WritingPath);
-                    var content = ReplaceVariables(await creation.GetFileContent());
-
-                    if (creation.HasLocation)
-                    {
-                        var folder = ReplaceVariables(creation.Location);
-                        if (!Directory.Exists(folder))
-                            Directory.CreateDirectory(folder);
-                    }
-
-                    await File.WriteAllTextAsync(path, content);
-                }
-                else
-                {
-                    var path = ReplaceVariables(creation.Location);
-                    if (!Directory.Exists(path))
-                        Directory.CreateDirectory(path);
-                }
+                var path = ReplaceVariables(file);
+                var content = ReplaceVariables(await File.ReadAllTextAsync(file));
+                await File.WriteAllTextAsync(path, content);
+            }
+            
+            var directories = System.IO.Directory.GetDirectories(directory);
+            foreach (var d in directories)
+            {
+                var path = ReplaceVariables(d);
+                if (!System.IO.Directory.Exists(path))
+                    System.IO.Directory.CreateDirectory(path);
+                
+                await CreateAll(d);
             }
         }
 

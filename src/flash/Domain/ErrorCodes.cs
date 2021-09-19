@@ -11,5 +11,6 @@ namespace flash.Domain
         public static string MissingTemplateFile => "MissingTemplateFile";
         public static string MissingFlashTemplateFolder => "MissingFlashTemplateFolder";
         public static string MissingTemplates => "MissingTemplates";
+        public static string EmptyTemplate => "EmptyTemplate";
     }
 }

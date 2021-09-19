@@ -144,6 +144,6 @@ public class SaveCustomer
 
 ## How to use
 
-Download the latest version of the flash executable from [Releases Page](https://github.com/ivanbicalho/flash-cli/releases) and place it in a folder that is in [PATH environment variable](https://en.wikipedia.org/wiki/PATH_(variable)) (it's necessary in order to use flash at all locations on the terminal).
+Download the latest version of the flash executable from [Releases Page](https://github.com/ivanbicalho/flash-cli/releases) and place it in a folder that is in [PATH environment variable](https://en.wikipedia.org/wiki/PATH_(variable)) (in order to use flash at all locations on the terminal).
 
 After that, create a folder named **flash-templates** in the same directory as the flash executable and configure your templates. To verify that your templates are configured correctly, use the **flash validate** command.
