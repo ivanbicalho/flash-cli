@@ -1,0 +1,8 @@
+{
+    "variables": [
+        {
+            "replace": "Test",
+            "question": "Enter the test name:"
+        }
+    ]
+}

@@ -1,9 +1,4 @@
 {
-    "creations": [
-        {
-            "templateFile": "Test.txt"
-        }
-    ],
     "variables" : [
         {
             "replace" : "teste"

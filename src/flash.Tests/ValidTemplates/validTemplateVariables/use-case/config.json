@@ -1,0 +1,9 @@
+{
+    "description" : "My description",
+    "variables": [
+        {
+            "replace": "Test",
+            "question": "Enter the test name:"
+        }
+    ]
+}

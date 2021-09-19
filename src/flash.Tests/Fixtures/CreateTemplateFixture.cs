@@ -2,13 +2,9 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
-using flash.Commands;
 using flash.Domain;
-using flash.Domain.Exceptions;
-using Xunit;
 
-namespace flash.Tests
+namespace flash.Tests.Fixtures
 {
     public class CreateTemplateFixture : IDisposable
     {
@@ -17,7 +13,7 @@ namespace flash.Tests
             var templateFolder = Path.Combine(
                 Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
                 "ValidTemplates",
-                "validVariables");
+                "validTemplateVariables");
             
             var templates = new FlashTemplates(templateFolder); 
             templates.Load().Wait();

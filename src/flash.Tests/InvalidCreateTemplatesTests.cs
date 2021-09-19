@@ -14,7 +14,7 @@ namespace flash.Tests
         [Fact]
         public async Task InvalidAssignVariableTest()
         {
-            var templates = await GetValidFlashTemplates("validVariables");
+            var templates = await GetValidFlashTemplates("validTemplateVariables");
             var template = templates.Get("use-case");
 
             var ex = await Assert.ThrowsAsync<FlashException>(async () =>
