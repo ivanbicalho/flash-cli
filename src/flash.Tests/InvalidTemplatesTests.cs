@@ -10,22 +10,26 @@ namespace flash.Tests
 {
     public class InvalidTemplatesTests
     {
+        public InvalidTemplatesTests()
+        {
+            string[] emptyDirectories =
+            {
+                "InvalidTemplates/missingTemplates",
+                "InvalidTemplates/missingTemplateFilesNoConfig/use-case",
+                "ValidTemplates/validTemplateVariables/use-case/Folder/TestN2Empty"
+            };
+
+            foreach (var emptyDirectory in emptyDirectories)
+            {
+                if (!Directory.Exists(emptyDirectory))
+                    Directory.CreateDirectory(emptyDirectory);
+            }
+        }
+
         [Fact]
         public async Task NoFlashTemplatesFolderTest()
         {
             await InvalidTemplateTest("aaa", ErrorCodes.MissingFlashTemplateFolder);
-        }
-
-        [Fact]
-        public async Task MissingTemplatesTest()
-        {
-            await InvalidTemplateTest("missingTemplates", ErrorCodes.MissingTemplates);
-        }
-
-        [Fact]
-        public async Task MissingTemplateFileTest()
-        {
-            await InvalidTemplateTest("missingTemplateFile", ErrorCodes.MissingTemplateFile);
         }
 
         [Fact]
@@ -35,39 +39,33 @@ namespace flash.Tests
         }
 
         [Fact]
-        public async Task NoConfigFileTest()
-        {
-            await InvalidTemplateTest("noConfigFile", ErrorCodes.InvalidConfigFile);
-        }
-
-        [Fact]
-        public async Task EmptyArrayCreationsTest()
-        {
-            await InvalidTemplateTest("emptyArrayCreations", ErrorCodes.EmptyArrayCreations);
-        }
-
-        [Fact]
-        public async Task InvalidTemplateFileTest()
-        {
-            await InvalidTemplateTest("invalidTemplateFile", ErrorCodes.InvalidLocationOrTemplateFile);
-        }
-        
-        [Fact]
         public async Task InvalidQuestionVariableTest()
         {
             await InvalidTemplateTest("invalidQuestionVariable", ErrorCodes.InvalidVariable);
         }
-        
+
         [Fact]
         public async Task InvalidReplaceVariableTest()
         {
             await InvalidTemplateTest("invalidReplaceVariable", ErrorCodes.InvalidVariable);
         }
-        
+
         [Fact]
-        public async Task InvalidCreationFieldsTest()
+        public async Task MissingTemplateFilesTest()
         {
-            await InvalidTemplateTest("invalidCreationFields", ErrorCodes.InvalidCreationFields);
+            await InvalidTemplateTest("missingTemplateFiles", ErrorCodes.EmptyTemplate);
+        }
+
+        [Fact]
+        public async Task MissingTemplateFilesNoConfigTest()
+        {
+            await InvalidTemplateTest("missingTemplateFilesNoConfig", ErrorCodes.EmptyTemplate);
+        }
+
+        [Fact]
+        public async Task MissingTemplatesTest()
+        {
+            await InvalidTemplateTest("missingTemplates", ErrorCodes.MissingTemplates);
         }
 
         private async Task InvalidTemplateTest(string location, string errorCode)

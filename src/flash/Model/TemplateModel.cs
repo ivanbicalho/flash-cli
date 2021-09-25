@@ -5,12 +5,12 @@ namespace flash.Model
 {
     public class TemplateModel
     {
-        public IEnumerable<CreationModel> Creations { get; set; } = new List<CreationModel>();
+        public string Description { get; set; }
         public IEnumerable<VariableModel> Variables { get; set; } = new List<VariableModel>();
 
         public Template ToDomainModel(string templateName, string flashTemplatesFolderPath)
         {
-            return new Template(templateName, flashTemplatesFolderPath, this);
+            return new Template(templateName, Description, flashTemplatesFolderPath, this);
         }
     }
 }

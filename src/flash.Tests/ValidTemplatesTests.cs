@@ -11,18 +11,24 @@ namespace flash.Tests
     public class ValidTemplatesTests
     {
         [Fact]
-        public async Task ValidCreationsTest()
+        public async Task ValidTemplateTest()
         {
-            await ValidTemplateTest("validCreations");
+            await ValidTest("validTemplate");
         }
         
         [Fact]
-        public async Task ValidVariablesTest()
+        public async Task ValidTemplateNoConfigTest()
         {
-            await ValidTemplateTest("validVariables");
+            await ValidTest("validTemplateNoConfig");
+        }
+        
+        [Fact]
+        public async Task ValidTemplateVariablesTest()
+        {
+            await ValidTest("validTemplateVariables");
         }
 
-        private async Task ValidTemplateTest(string location)
+        private async Task ValidTest(string location)
         {
             var templateFolder = Path.Combine(
                 Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),

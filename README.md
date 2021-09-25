@@ -10,7 +10,7 @@ In this example we'll use txt and c# files, but you can define any kind of files
 
 To create a new template, you just have to add a new folder inside the folder **flash-templates**, which has to be located together with flash executable.
 
-Inside your folder, just put your template files and a **config.json**.
+Inside your folder, just put your template files and folders and a **config.json** (optional).
 
 The folder structure is like this:
 
@@ -19,44 +19,35 @@ flash-templates
     use-case
         config.json
         Readme.txt
-        UseCaseName.cs
-        UseCaseNameInput.cs
+        EmptyFolderToCreate
+        UseCaseName
+            UseCaseName.cs
+            UseCaseNameInput.cs
 ```
 
 With the structure above, you can use the "use-case" template.
 
 ## The config.json file
 
-The config.json file contains all of the template configuration, the name of the files you want to create, the location of them and your variables, which are optionals.
+The config.json file is optional and contains all of the template configuration, which are the template description and variables.
 
+The template description will be shown to the user when they interact with the flash CLI, to help them understand what that template does.
+
+The variables are used to replace the occurrences on the template files and folders.
+ 
 The config.json structure example:
 
 ```json
 {
-    "creations": [
+    "description" : "Create a use case based on clean architecture",
+    "variables" : [
         {
-            "templateFile": "Readme.txt"
+            "replace" : "UseCaseName",
+            "question" : "Enter the use case name:"
         },
         {
-            "location" : "Features/UseCaseName",
-            "templateFile": "UseCaseName.cs"
-        },
-        {
-            "location" : "Features/UseCaseName",
-            "templateFile": "UseCaseNameInput.cs"
-        },
-        {
-            "location": "EmptyFolderToCreate"
-        }
-    ],
-    "variables": [
-        {
-            "replace": "UseCaseName",
-            "question": "Enter the use case name:"
-        },
-        {
-            "replace": "Repository",
-            "question": "Enter the repository name:"
+            "replace" : "Repository",
+            "question" : "Enter the repository name:"
         }
     ]
 }
@@ -87,10 +78,9 @@ In the terminal's current directory, we'll have:
 ```
 Readme.txt
 EmptyFolderToCreate
-Features
-    MyFirstUseCase
-        MyFirstUseCase.cs
-        MyFirstUseCaseInput.cs
+MyFirstUseCase
+    MyFirstUseCase.cs
+    MyFirstUseCaseInput.cs
 ```
 
 Let's suppose that inside the **Readme.txt** file the initial value was:
@@ -144,6 +134,6 @@ public class SaveCustomer
 
 ## How to use
 
-Download the latest version of the flash executable from [Releases Page](https://github.com/ivanbicalho/flash-cli/releases) and place it in a folder that is in [PATH environment variable](https://en.wikipedia.org/wiki/PATH_(variable)) (it's necessary in order to use flash at all locations on the terminal).
+Download the latest version of the flash executable from [Releases Page](https://github.com/ivanbicalho/flash-cli/releases) and place it in a folder that is in [PATH environment variable](https://en.wikipedia.org/wiki/PATH_(variable)) (in order to use flash at all locations on the terminal).
 
 After that, create a folder named **flash-templates** in the same directory as the flash executable and configure your templates. To verify that your templates are configured correctly, use the **flash validate** command.
